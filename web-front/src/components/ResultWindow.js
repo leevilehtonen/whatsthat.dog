@@ -1,10 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react'
 
-const ResultWindow = ({ canvas }) => {
+const ResultWindow = ({ canvas, predictResult }) => {
     const canvasContainerRef = useRef(null)
 
     useEffect(() => {
-        console.log(canvas)
         if (canvasContainerRef.current.hasChildNodes()) {
             canvasContainerRef.current.replaceChild(canvas, canvasContainerRef.current.firstChild);
         } else {
@@ -16,13 +15,16 @@ const ResultWindow = ({ canvas }) => {
     // flex
     return (
         <div className="resultwindow">
+            {!predictResult && <progress className="progress is-small is-dark" max="100"></progress>}
             <div className="columns is-gapless">
                 <div className="column">
                     <div className="resultwindow-canvas" ref={canvasContainerRef} />
                 </div>
-                <div className="column">
-                    Second column fepo pioewjoif jiewojmo fnjueown iufhjniu
-                </div>
+
+                {predictResult &&
+                    <div className="column">
+                        {predictResult.slice(0, 5).map((item) => <p>{item.breed}: {item.prob}</p>)}
+                    </div>}
             </div>
         </div>
 

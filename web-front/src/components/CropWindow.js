@@ -6,7 +6,7 @@ const getDefaultCanvas = (image) => {
     canvas.width = image.width;
     canvas.height = image.height;
     const ctx = canvas.getContext("2d");
-    ctx.drawImage(image, 0, 0)
+    ctx.drawImage(image, 0, 0, image.width, image.height)
     return canvas;
 }
 

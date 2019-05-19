@@ -1,10 +1,12 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import PredictModal from '../components/PredictModal';
+import { init } from '../services/AI'
 
 const Index = () => {
   const [open, setOpen] = useState(false)
   const [src, setSrc] = useState(null)
+  const [model, setModel] = useState(null)
 
   const onSelectFile = e => {
     const reader = new FileReader();
@@ -15,7 +17,19 @@ const Index = () => {
     reader.readAsDataURL(e.target.files[0]);
   };
 
+  const onCancelClick = () => {
+    setOpen(false)
+    setSrc(null)
+  }
 
+
+  useEffect(() => {
+    async function initMLmodel() {
+      const loadedModel = await init()
+      setModel(loadedModel)
+    }
+    initMLmodel();
+  }, []);
 
   return (
     <div className="container page">
@@ -36,7 +50,7 @@ const Index = () => {
           </span>
         </label >
       </div>
-      {src && <PredictModal open={open} setOpen={setOpen} src={src} />}
+      {src && <PredictModal open={open} src={src} model={model} onCancelClick={onCancelClick} />}
 
     </div>
   );

@@ -47,6 +47,7 @@ for index, folder in enumerate(os.listdir("data/Images")):
         annotation_paths.append(f"data/Annotation/{folder}/{item.split('.')[0]}")
         categories.append(index)
 
+
 df_input = pd.DataFrame({"image_file": image_paths, "annotation_file": annotation_paths, "category": categories})
 df_input = df_input.sample(frac=1, random_state=RANDOM_STATE).reset_index(drop=True)
 
