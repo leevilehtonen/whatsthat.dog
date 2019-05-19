@@ -13,12 +13,14 @@ const PredictModal = ({ open, onCancelClick, src, model }) => {
 
     const onPredictClick = async () => {
         setModalState("RESULT")
-        const result = classify(model, preprocess(canvas));
-        setPredictResult(result)
-
+        async function classifyData() {
+            const result = classify(model, preprocess(canvas));
+            setPredictResult(result)
+        }
+        classifyData();
     }
-
-
+    // TODO
+    // https://www.fullstackreact.com/articles/introduction-to-web-workers-with-react/
 
     return (
         <div className={"modal animated " + (open ? "is-active fadeIn faster" : "fadeOut faster")}>
