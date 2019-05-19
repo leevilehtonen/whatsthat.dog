@@ -1,0 +1,124 @@
+@charset "utf-8";
+@import "~bulma/sass/utilities/initial-variables.sass";
+@import "~animate.css/animate.css";
+@import "~react-image-crop/lib/ReactCrop.scss";
+@import url('https://fonts.googleapis.com/css?family=Schoolbell|Patrick+Hand&display=swap');
+
+
+// @import "~@fortawesome/fontawesome-svg-core/styles.css";
+
+$darkRed: #5b2636;
+$danger: $darkRed;
+$link: $black;
+$text: $black;
+
+// Update some of Bulma's component variables
+$footer-background-color: $white;
+$footer-padding: 1rem;
+$navbar-item-color: $darkRed;
+$navbar-item-hover-color: $white;
+$navbar-item-hover-background-color: lighten($darkRed, 20%);
+$navbar-item-active-background-color: lighten($darkRed, 10%);
+$navbar-item-active-color: $white;
+/*
+$modal-card-head-background-color	color	$background	hsl(0, 0%, 96%)
+
+$modal-card-head-radius	size	$radius-large	6px
+$modal-card-title-color	color	$text-strong	hsl(0, 0%, 21%)
+$modal-card-title-line-height	string	1	
+$modal-card-title-size	size	$size-4	1.5rem
+$modal-card-foot-radius	size	$radius-large	6px
+$modal-card-foot-border-top	size	1px solid $border	
+$modal-card-body-background-color	color	$white	hsl(0, 0%, 100%)
+$modal-card-body-padding
+*/
+
+$modal-card-head-background-color: $darkRed;
+$modal-card-title-color: $white;
+$modal-card-body-padding: 0;
+$modal-card-head-border-bottom: 0;
+$modal-card-foot-border-top: 0;
+
+$title-color: $white;
+$title-size: 4rem;
+$title-weight: 200;
+$subtitle-color: $white-ter;
+$subtitle-weight: 200;
+
+// Import only what you need from Bulma
+@import "~bulma/sass/utilities/_all.sass";
+@import "~bulma/sass/base/_all.sass";
+@import "~bulma/sass/grid/_all.sass";
+@import "~bulma/sass/elements/container.sass";
+@import "~bulma/sass/elements/title.sass";
+@import "~bulma/sass/elements/icon.sass";
+@import "~bulma/sass/elements/button.sass";
+@import "~bulma/sass/elements/form.sass";
+@import "~bulma/sass/layout/footer.sass";
+@import "~bulma/sass/layout/hero.sass";
+@import "~bulma/sass/layout/section.sass";
+@import "~bulma/sass/components/navbar.sass";
+@import "~bulma/sass/components/modal.sass";
+
+html {
+  overflow: auto;
+}
+body {
+  background-image: url("./static/bg3.png");
+  background-color: #5b2636;
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-size: contain;
+  padding: 0;
+  margin: 0;
+  font-family: 'Schoolbell', cursive;
+}
+
+$bg-fade-delay: 1s;
+$bg-fade-duration: 2s;
+$bg-fade-target-color: rgba(0, 0, 0, 1);
+
+
+.modal-card {
+  width:unset;
+}
+
+.cropwindow {
+  max-width: 480px;
+}
+
+.resultwindow {
+  min-width: 480px;
+}
+
+.resultwindow-canvas {
+  display: flex;
+}
+
+.ReactCrop {
+  display: block;
+}
+.ReactCrop__image {
+  max-height: none;
+}
+
+.title {
+  font-size: 5rem;
+  text-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.subtitle {
+  font-family: 'Patrick Hand', cursive;
+  text-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+ }
+
+
+.navbar {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.55);
+}
+
+.navbar-menu {
+  box-shadow: none;
+}
+
+

@@ -1,0 +1,8 @@
+data/
+logs/
+logs/aws/
+predict/
+backup/
+models/
+.ipynb_checkpoints
+webfront/node_modules/
