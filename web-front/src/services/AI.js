@@ -3,9 +3,10 @@ import categories from "../category_names.json"
 
 
 export const init = async () => {
-    console.log("loading model")
-    const model = await tf.loadGraphModel("https://raw.githubusercontent.com/leevilehtonen/whatsthat.dog/master/web-front/src/models/model102402/model.json")
-    console.log("loaded model")
+    const model = await tf.loadGraphModel("https://s3-eu-west-1.amazonaws.com/ai-data-storage/serve/model51205/model.json")
+    const warmupResult = model.predict(tf.zeros([1, 224, 224, 3]));
+    await warmupResult.data();
+    warmupResult.dispose();
     return model;
 }
 
@@ -20,8 +21,8 @@ export const preprocess = (canvas) => {
 export const classify = (model, input) => {
     const output = model.predict(input, { batchSize: 1 })
     const outputdata = output.arraySync();
-    const response = outputdata[0].map((val, i) => ({ breed: categories[i], prob: val, index: i }))
-    const sorted_response = response.sort((a, b) => b.prob - a.prob)
+    const response = outputdata[0].map((val, i) => ({ Breed: categories[i], Probability: val, index: i }))
+    const sorted_response = response.sort((a, b) => b.Probability - a.Probability)
     return sorted_response
 }
 
