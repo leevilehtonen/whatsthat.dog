@@ -1,20 +1,17 @@
-import React from 'react';
-import Header from './components/Header'
-import Body from './components/Body'
-import Footer from './components/Footer'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import Index from './pages/Index'
-import About from './pages/About'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUpload } from '@fortawesome/free-solid-svg-icons'
-
-
+import React from "react";
+import Header from "./components/Header";
+import Body from "./components/Body";
+import Footer from "./components/Footer";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Index from "./pages/Index";
+import About from "./pages/About";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faUpload, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 const App = () => {
-  library.add(faUpload)
+  library.add(faUpload, faChevronLeft);
   return (
     <div className="App">
-
       <Router>
         <Header />
 
@@ -28,6 +25,6 @@ const App = () => {
       </Router>
     </div>
   );
-}
+};
 
 export default App;

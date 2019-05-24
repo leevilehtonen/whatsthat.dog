@@ -1,58 +1,78 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+import React, { useState, useRef, useEffect } from "react";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  Label
+} from "recharts";
 import { Animated } from "react-animated-css";
 
-
-
-
-
 const ResultWindow = ({ canvas, predictResult }) => {
-    const canvasContainerRef = useRef(null)
+  const canvasContainerRef = useRef(null);
 
-    useEffect(() => {
-        if (canvasContainerRef.current.hasChildNodes()) {
-            canvasContainerRef.current.replaceChild(canvas, canvasContainerRef.current.firstChild);
-        } else {
-            canvasContainerRef.current.appendChild(canvas);
-        }
+  useEffect(() => {
+    if (canvasContainerRef.current.hasChildNodes()) {
+      canvasContainerRef.current.replaceChild(
+        canvas,
+        canvasContainerRef.current.firstChild
+      );
+    } else {
+      canvasContainerRef.current.appendChild(canvas);
+    }
+  }, [canvas]);
 
-    }, [canvas])
+  // flex
+  return (
+    <div className="resultwindow">
+      {!predictResult && (
+        <progress className="progress is-small is-dark" max="100" />
+      )}
+      <div className="columns is-gapless">
+        <Animated
+          animationIn="fadeIn"
+          animationOut="fadeOut"
+          isVisible={true}
+          animationInDuration={500}
+          className="column"
+        >
+          <div className="resultwindow-canvas" ref={canvasContainerRef} />
+        </Animated>
 
-    // flex
-    return (
-        <div className="resultwindow">
-            {!predictResult && <progress className="progress is-small is-dark" max="100"></progress>}
-            <div className="columns is-gapless">
-
-                <Animated animationIn="fadeIn" animationOut="fadeOut" isVisible={true} animationInDuration={500} className="column">
-                    <div className="resultwindow-canvas" ref={canvasContainerRef} />
-                </Animated>
-
-                <Animated animationIn="fadeInLeft" animationOut="fadeOutLeft" isVisible={predictResult ? true : false} animationInDuration={500} className="column">
-                    <ResponsiveContainer width={canvas.width} height="100%">
-                        <BarChart data={predictResult.slice(0, 5)} layout="vertical" margin={{ top: 20, right: 20, left: 40, bottom: 10 }}>
-                            <YAxis dataKey="Breed" type="category" />
-                            <XAxis type="number" />
-                            <Tooltip />
-                            <Bar dataKey="Probability" stroke="#2f0010" fill="#8a5060" />
-                        </BarChart>
-                    </ResponsiveContainer>
-                </Animated>
-
-
-
-            </div>
-        </div>
-
-    )
-}
+        <Animated
+          animationIn="fadeInLeft"
+          animationOut="fadeOutLeft"
+          isVisible={predictResult ? true : false}
+          animationInDuration={500}
+          className="column"
+        >
+          <ResponsiveContainer width={canvas.width} height="100%">
+            <BarChart
+              data={predictResult.slice(0, 5)}
+              layout="vertical"
+              margin={{ top: 20, right: 20, left: 40, bottom: 20 }}
+            >
+              <YAxis dataKey="Breed" type="category" />
+              <XAxis type="number">
+                <Label
+                  value="Probability"
+                  offset={-10}
+                  position="insideBottom"
+                />
+              </XAxis>
+              <Tooltip />
+              <Bar dataKey="Probability" stroke="#2f0010" fill="#8a5060" />
+            </BarChart>
+          </ResponsiveContainer>
+        </Animated>
+      </div>
+    </div>
+  );
+};
 
 export default ResultWindow;
-
-
-
-
-
 
 /*
 <ResponsiveContainer width={canvas.width} height="100%">
