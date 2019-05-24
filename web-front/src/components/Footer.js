@@ -1,10 +1,8 @@
-import React from 'react';
+import React from "react";
 
 const Footer = () => (
-  <footer className="hero-foot footer">
-    <div className="container has-text-centered">
-      <p>© Leevi Lehtonen 2019</p>
-    </div>
+  <footer className="hero-foot footer has-text-centered">
+    <p>© Leevi Lehtonen 2019</p>
   </footer>
 );
 

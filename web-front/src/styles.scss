@@ -2,8 +2,7 @@
 @import "~bulma/sass/utilities/initial-variables.sass";
 @import "~animate.css/animate.min.css";
 @import "~react-image-crop/lib/ReactCrop.scss";
-@import url('https://fonts.googleapis.com/css?family=Schoolbell|Patrick+Hand&display=swap');
-
+@import url("https://fonts.googleapis.com/css?family=Schoolbell|Patrick+Hand&display=swap");
 
 // @import "~@fortawesome/fontawesome-svg-core/styles.css";
 
@@ -63,21 +62,20 @@ body {
   background-size: contain;
   padding: 0;
   margin: 0;
-  font-family: 'Schoolbell', cursive;
+  font-family: "Schoolbell", cursive;
 }
 
 $bg-fade-delay: 1s;
 $bg-fade-duration: 2s;
 $bg-fade-target-color: rgba(0, 0, 0, 1);
 
-
 .progress {
-  margin: 0!important;
+  margin: 0 !important;
   border-radius: 0;
 }
 
 .modal-card {
-  width:unset;
+  width: unset;
 }
 .modal-card-body {
   overflow: hidden;
@@ -96,12 +94,14 @@ $bg-fade-target-color: rgba(0, 0, 0, 1);
 }
 
 .notification-container {
-  position: fixed; 
+  position: fixed;
   bottom: 5rem;
   left: 1rem;
 }
 
-
+.navbar {
+  z-index: auto;
+}
 
 .ReactCrop {
   display: block;
@@ -116,10 +116,9 @@ $bg-fade-target-color: rgba(0, 0, 0, 1);
 }
 
 .subtitle {
-  font-family: 'Patrick Hand', cursive;
+  font-family: "Patrick Hand", cursive;
   text-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
- }
-
+}
 
 .navbar {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.55);
@@ -128,5 +127,3 @@ $bg-fade-target-color: rgba(0, 0, 0, 1);
 .navbar-menu {
   box-shadow: none;
 }
-
-
