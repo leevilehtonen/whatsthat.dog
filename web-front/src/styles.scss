@@ -78,15 +78,27 @@ $bg-fade-target-color: rgba(0, 0, 0, 1);
   width: unset;
 }
 .modal-card-body {
-  overflow: hidden;
+  overflow: auto;
 }
 
 .cropwindow {
   max-width: 480px;
 }
 
-.resultwindow {
+.resultwindow .is-hidden-touch {
   min-width: 480px;
+}
+
+.resultwindow .is-hidden-desktop {
+  max-width: 480px;
+}
+
+.columns.is-gapless {
+  margin-bottom: 0 !important;
+}
+
+.resultwindow {
+  margin: 0;
 }
 
 .resultwindow-canvas {

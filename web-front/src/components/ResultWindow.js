@@ -10,19 +10,36 @@ import {
 } from "recharts";
 import { Animated } from "react-animated-css";
 
+const duplicateCanvas = canvas => {
+  const newCanvas = canvas.cloneNode();
+  newCanvas.getContext("2d").drawImage(canvas, 0, 0);
+  return newCanvas;
+};
+
 const ResultWindow = ({ canvas, predictResult }) => {
-  const canvasContainerRef = useRef(null);
+  const canvasContainerRefDesktop = useRef(null);
+  const canvasContainerRefMobile = useRef(null);
+  const [canvasDesktop] = useState(duplicateCanvas(canvas));
+  const [canvasMobile] = useState(duplicateCanvas(canvas));
 
   useEffect(() => {
-    if (canvasContainerRef.current.hasChildNodes()) {
-      canvasContainerRef.current.replaceChild(
-        canvas,
-        canvasContainerRef.current.firstChild
+    if (canvasContainerRefMobile.current.hasChildNodes()) {
+      canvasContainerRefMobile.current.replaceChild(
+        canvasMobile,
+        canvasContainerRefMobile.current.firstChild
       );
     } else {
-      canvasContainerRef.current.appendChild(canvas);
+      canvasContainerRefMobile.current.appendChild(canvasMobile);
     }
-  }, [canvas]);
+    if (canvasContainerRefDesktop.current.hasChildNodes()) {
+      canvasContainerRefDesktop.current.replaceChild(
+        canvasDesktop,
+        canvasContainerRefDesktop.current.firstChild
+      );
+    } else {
+      canvasContainerRefDesktop.current.appendChild(canvasDesktop);
+    }
+  }, [canvasMobile, canvasDesktop]);
 
   // flex
   return (
@@ -30,7 +47,7 @@ const ResultWindow = ({ canvas, predictResult }) => {
       {!predictResult && (
         <progress className="progress is-small is-dark" max="100" />
       )}
-      <div className="columns is-gapless is-multiline is-mobile is-inline-flex">
+      <div className="columns is-gapless is-hidden-touch">
         <Animated
           animationIn="fadeIn"
           animationOut="fadeOut"
@@ -38,7 +55,10 @@ const ResultWindow = ({ canvas, predictResult }) => {
           animationInDuration={500}
           className="column"
         >
-          <div className="resultwindow-canvas" ref={canvasContainerRef} />
+          <div
+            className="resultwindow-canvas"
+            ref={canvasContainerRefDesktop}
+          />
         </Animated>
 
         <Animated
@@ -48,7 +68,42 @@ const ResultWindow = ({ canvas, predictResult }) => {
           animationInDuration={500}
           className="column"
         >
-          <ResponsiveContainer width={canvas.width} height="100%">
+          <ResponsiveContainer width={canvasDesktop.width} height="100%">
+            <BarChart
+              data={predictResult.slice(0, 5)}
+              layout="vertical"
+              margin={{ top: 20, right: 20, left: 40, bottom: 20 }}
+            >
+              <YAxis dataKey="Breed" type="category" />
+              <XAxis type="number">
+                <Label
+                  value="Probability"
+                  offset={-10}
+                  position="insideBottom"
+                />
+              </XAxis>
+              <Tooltip />
+              <Bar dataKey="Probability" stroke="#2f0010" fill="#8a5060" />
+            </BarChart>
+          </ResponsiveContainer>
+        </Animated>
+      </div>
+      <div className="is-hidden-desktop">
+        <Animated
+          animationIn="fadeIn"
+          animationOut="fadeOut"
+          isVisible={true}
+          animationInDuration={500}
+        >
+          <div className="resultwindow-canvas" ref={canvasContainerRefMobile} />
+        </Animated>
+        <Animated
+          animationIn="fadeIn"
+          animationOut="fadeOut"
+          isVisible={predictResult ? true : false}
+          animationInDuration={500}
+        >
+          <ResponsiveContainer width={canvasMobile.width} height={400}>
             <BarChart
               data={predictResult.slice(0, 5)}
               layout="vertical"
