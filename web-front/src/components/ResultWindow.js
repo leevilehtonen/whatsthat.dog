@@ -30,7 +30,7 @@ const ResultWindow = ({ canvas, predictResult }) => {
       {!predictResult && (
         <progress className="progress is-small is-dark" max="100" />
       )}
-      <div className="columns is-gapless is-mobile">
+      <div className="columns is-gapless is-multiline is-mobile is-inline-flex">
         <Animated
           animationIn="fadeIn"
           animationOut="fadeOut"
