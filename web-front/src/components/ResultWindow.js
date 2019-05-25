@@ -68,7 +68,7 @@ const ResultWindow = ({ canvas, predictResult }) => {
           animationInDuration={500}
           className="column"
         >
-          <ResponsiveContainer width={canvasDesktop.width} height="100%">
+          <ResponsiveContainer width={400} height="100%">
             <BarChart
               data={predictResult.slice(0, 5)}
               layout="vertical"
@@ -88,14 +88,18 @@ const ResultWindow = ({ canvas, predictResult }) => {
           </ResponsiveContainer>
         </Animated>
       </div>
-      <div className="is-hidden-desktop">
+      <div className="is-hidden-desktop" style={{ width: "80vw" }}>
         <Animated
           animationIn="fadeIn"
           animationOut="fadeOut"
           isVisible={true}
           animationInDuration={500}
         >
-          <div className="resultwindow-canvas" ref={canvasContainerRefMobile} />
+          <div
+            className="resultwindow-canvas"
+            ref={canvasContainerRefMobile}
+            style={{ justifyContent: "center" }}
+          />
         </Animated>
         <Animated
           animationIn="fadeIn"
@@ -103,7 +107,7 @@ const ResultWindow = ({ canvas, predictResult }) => {
           isVisible={predictResult ? true : false}
           animationInDuration={500}
         >
-          <ResponsiveContainer width={canvasMobile.width} height={400}>
+          <ResponsiveContainer width="100%" height={400}>
             <BarChart
               data={predictResult.slice(0, 5)}
               layout="vertical"

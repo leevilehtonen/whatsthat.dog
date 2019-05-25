@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Animated } from "react-animated-css";
-
+import loadImage from "blueimp-load-image";
 import PredictModal from "../components/PredictModal";
 import { init } from "../services/AI";
 import Notification from "../components/Notification";
@@ -50,14 +50,26 @@ const Index = () => {
     }
   };
 
-  const onSelectFile = e => {
-    const reader = new FileReader();
-    reader.addEventListener("load", () => {
-      setSrc(reader.result);
-      setOpen(true);
-    });
-    reader.readAsDataURL(e.target.files[0]);
-    e.target.value = "";
+  const onSelectFile = async e => {
+    const loadCanvas = event =>
+      new Promise((res, rej) => {
+        loadImage(event.target.files[0], img => res(img), {
+          orientation: true
+        });
+        event.target.value = "";
+      });
+    const createUrl = canvas =>
+      new Promise((res, rej) => {
+        canvas.toBlob(blob => {
+          res(URL.createObjectURL(blob));
+        }, "image/jpeg");
+      });
+
+    const canvas = await loadCanvas(e);
+    const src = await createUrl(canvas);
+
+    setSrc(src);
+    setOpen(true);
   };
 
   const onCancelClick = () => {

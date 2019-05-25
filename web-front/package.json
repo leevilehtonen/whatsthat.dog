@@ -9,6 +9,7 @@
     "@tensorflow/tfjs": "^1.1.2",
     "@tensorflow/tfjs-converter": "^1.1.2",
     "animate.css": "^3.7.0",
+    "blueimp-load-image": "^2.21.0",
     "gh-pages": "^2.0.1",
     "react": "^16.8.6",
     "react-animated-css": "^1.2.1",
